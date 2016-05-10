@@ -3,7 +3,12 @@
 use Aura\Di\ContainerBuilder;
 
 // Load configuration
-$config = require __DIR__ . '/config.php';
+if (isset($_SERVER['APPLICATION_ID']) && !empty($_SERVER['APPLICATION_ID'])) {
+    // for Google App Engine
+    $config = require __DIR__ . '/config-gae.php';
+}else{
+    $config = require __DIR__ . '/config.php';
+}
 
 // Build container
 $builder = new ContainerBuilder();
